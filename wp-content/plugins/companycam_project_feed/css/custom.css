@@ -1,0 +1,75 @@
+.color-picker {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .swatch {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    cursor: pointer;
+    outline: 4px solid transparent;
+  }
+  
+  .swatch.active {
+    outline-color: black;
+  }
+  
+  .swatch.navy {
+    background: #062e58;
+  }
+  
+  .swatch.blue {
+    background: #0074D9;
+  }
+  
+  .swatch.aqua {
+    background: #5FBFE5;
+  }
+  
+  .swatch.teal {
+    background: #39CCCC;
+  }
+  
+  .swatch.olive {
+    background: #3D9970;
+  }
+  
+  .swatch.green {
+    background: #2ECC40;
+  }
+  
+  .swatch.yellow {
+    background: #FFDC00;
+  }
+  
+  .swatch.orange {
+    background: #FF851B;
+  }
+  
+  .swatch.red {
+    background: #FF4136;
+  }
+  
+  .swatch.pink {
+    background: #F012BE;
+  }
+  
+  .swatch.purple {
+    background: #B10DC9;
+  }
+  
+  .swatch.maroon {
+    background: #85144B;
+  }
+  
+  .swatch.gray {
+    background: #999999;
+  }
+  
+  .swatch.black {
+    background: #111111;
+  }

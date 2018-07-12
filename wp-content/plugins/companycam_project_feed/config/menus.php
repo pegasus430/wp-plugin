@@ -12,7 +12,6 @@ function my_menu_pages(){
 	add_submenu_page('companycam-admin-home', 'CompanyCam Feed', 'Project category', 'manage_options','edit-tags.php?taxonomy=companycam_feed_category&post_type=companycam_feed');
 	//add_submenu_page('companycam-admin-home', 'CompanyCam Option', 'CompanyCam', 'manage_options', 'companycam-admin-menu','my_plugin_options' );
 	add_submenu_page('companycam-admin-home', 'CompanyCam Setting', 'Setting', 'manage_options', 'companycam-admin-setting','my_plugin_setting' );
-	add_submenu_page('companycam-admin-home', 'CompanyCam Style', 'Style', 'manage_options', 'companycam-admin-style','my_plugin_style' );
 	add_submenu_page('companycam-admin-home', 'CompanyCam Help', 'Help', 'manage_options', 'companycam-admin-help','my_plugin_help' );
 }     
 
@@ -39,9 +38,6 @@ function my_plugin_home() {
 
 	</div>
 	<div class="container companycam">
-		<button class="tablink" onclick="openPage('Home', this)">Description</button>
-		<button class="tablink" onclick="openPage('News', this)" id="defaultOpen">News Feed</button>
-		<button class="tablink" onclick="openPage('Contact', this)">Change log</button>
 		<div class="tab_data">
 			<div id="Home" class="tabcontent" style="display: block;">
 				<h2 dir="ltr"><strong>Description Company Cam Custom Plugin</strong></h2>
@@ -102,12 +98,8 @@ function my_plugin_home() {
 					<li><strong>Author:</strong> <a href="#" target="_blank">Automattic</a></li>
 					<li><strong>Last Updated:</strong> 2 days ago</li>
 				</ul>
-			</div>
-			<div id="News" class="tabcontent">
-			  <h3>News</h3>
-			  <p> News Feed (Dynamic - coming from CompanyCam)</p> 
-			</div>
-			<div id="Contact" class="tabcontent">
+				<hr/>
+
 				<h2>Change log of plugin</h2>
 				<h3><strong>Version:</strong> 1.0 &ndash; 2018-06-20</h3>
 				<ul>
@@ -168,11 +160,11 @@ function my_plugin_setting() {
 	<?php
 	}
 	?>
- 	<h2>Url slug</h2>
+ 	<h2>CompanyCam Projects</h2>
 	<hr/>
 	<form name="form" method="post" action="">
 		<p>
-			<?php _e('Change url slug:'); ?>
+			<?php _e('Enter Folder Name:'); ?>
 			<input type="text" name="<?php echo $url_slug; ?>" value="<?php echo $url_slug_value; ?>" size="50">
 		</p>
 		<p>
@@ -191,15 +183,124 @@ function my_plugin_setting() {
 		?>
 		<div class="updated"><p><strong><?php _e('Settings successfully saved!' ); ?></strong></p></div>
 	<?php endif; ?>
-    <form name="form" method="post" action="">
-        <p>
-            <?php _e('Color Picker:'); ?>
-            <input type="color" name="color" value="<?php echo $color; ?>" size="50">
-        </p>
+
+<style>
+	
+  .color-picker {
+    display: -ms-flexbox;
+    display: flex;
+  }
+  
+  .swatch {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    cursor: pointer;
+    outline: 4px solid transparent;
+  }
+  
+  .swatch.active {
+    outline-color: black;
+  }
+  
+  .swatch.navy {
+    background: #062e58;
+  }
+  
+  .swatch.blue {
+    background: #0074D9;
+  }
+  
+  .swatch.aqua {
+    background: #5FBFE5;
+  }
+  
+  .swatch.teal {
+    background: #39CCCC;
+  }
+  
+  .swatch.olive {
+    background: #3D9970;
+  }
+  
+  .swatch.green {
+    background: #2ECC40;
+  }
+  
+  .swatch.yellow {
+    background: #FFDC00;
+  }
+  
+  .swatch.orange {
+    background: #FF851B;
+  }
+  
+  .swatch.red {
+    background: #FF4136;
+  }
+  
+  .swatch.pink {
+    background: #F012BE;
+  }
+  
+  .swatch.purple {
+    background: #B10DC9;
+  }
+  
+  .swatch.maroon {
+    background: #85144B;
+  }
+  
+  .swatch.gray {
+    background: #999999;
+  }
+  
+  .swatch.black {
+    background: #111111;
+  }
+
+</style>
+
+	<h2>Select Color </h2>
+	<hr/>
+    <form name="form" method="post" action="" style="position:relative;">
+		<h3>Brand Color</h3>
+		<div class="color-picker">
+			<div class="swatch navy" data-color="navy"></div>
+			<div class="swatch active blue" data-color="blue"></div>
+			<div class="swatch aqua" data-color="aqua"></div>
+			<div class="swatch teal" data-color="teal"></div>
+			<div class="swatch olive" data-color="olive"></div>
+			<div class="swatch green" data-color="green"></div>
+			<div class="swatch yellow" data-color="yellow"></div>
+			<div class="swatch orange" data-color="orange"></div>
+			<div class="swatch red" data-color="red"></div>
+			<div class="swatch pink" data-color="pink"></div>
+			<div class="swatch purple" data-color="purple"></div>
+			<div class="swatch maroon" data-color="maroon"></div>
+			<div class="swatch gray" data-color="gray"></div>
+			<div class="swatch black" data-color="black"></div>
+		</div>
         <p>
             <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save') ?>" />
         </p>
-    </form>
+	</form>
+	<hr/>
+	
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+  
+// Color swatch functionality - we won't need this in the final plugin code
+
+		jQuery('.swatch').click(function() {
+			var color = jQuery(this).attr('data-color');
+			jQuery('.swatch').removeClass('active');
+			jQuery(this).addClass('active')
+			jQuery('html').removeClass().addClass(color);
+			jQuery(':root').css('--theme-color', color);
+		})
+	});
+</script>
     <!--  url slug code end  -->
 	<?php
 	// verification token code start 
@@ -217,71 +318,9 @@ function my_plugin_setting() {
 	<?php
 	}
 	?>
-	<h2>Verification token</h2>
-	<hr/>
-	<form name="form" method="post" action="">
-		<p>
-			<?php _e('Change verification token:'); ?>
-			<input type="text" name="<?php echo $verification_token; ?>" value="<?php echo $verification_token_value; ?>" size="50">
-		</p>
-		<p>
-			<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save') ?>" />  
-		</p>
-	</form>
 	<?php	
 	/* verification token code end */
 	}
-
-function my_plugin_style() {
-	//Style page	
-	$comp_color = "CompCam_color";
-	$comp_logo = "CompCam_logo";
-	if(isset($_POST[$comp_logo])){
-		update_option($comp_logo, $_POST[$comp_logo]);
-		var_dump("aa");
-		exit;
-	}	
-	if(isset($_POST[$comp_color])){
-		update_option($comp_color, $_POST[$comp_color]);
-		var_dump("bb");
-		exit;
-	}
-	$comp_color_value = get_option($comp_color);
-	$comp_logo_url = get_option($comp_logo);
-	?>
-	<div class="container">
-		<div class="style-page-content">
-			<div class="sec-logo">
-				<h2>Logo</h2>
-				<hr/>
-				<form name="logo-form" method="post">
-					<p>
-						<?php _e('Company Logo:'); ?>
-						<input type="text" name="<?php echo $comp_logo; ?>" value="<?php echo $comp_logo_url; ?>">
-					</p>
-					<p>
-						<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save') ?>" />  
-					</p>
-				</form>  
-			</div>
-			<div class="sec-logo">
-				<h2>Color Scheme</h2>
-				<hr/>
-				<form name="logo-form" method="post">
-					<p>
-						<?php _e('Color:'); ?>
-						<input style="padding: 0;width: 50px;height: 30px;" type="color" name="<?php echo $comp_color; ?>" value="<?php echo $comp_color_value; ?>">
-					</p>
-					<p>
-						<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save') ?>" />  
-					</p>
-				</form>  
-			</div>
-		</div>
-	</div>
-	
-	<?php	
-}
 
 function my_plugin_help() {
 	?>
@@ -338,7 +377,6 @@ function my_plugin_options() {
 	</form>
 <?php
 }
-
 
 
 

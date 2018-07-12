@@ -1,5 +1,7 @@
 <?php
 defined('ABSPATH') or die('No direct access allowed.');
+
+wp_enqueue_style ('plugin-style', plugin_dir_path(__FILE__) . 'css/style.css');
 /*
 Plugin Name:  CompanyCam Project Feed
 Plugin URI:
@@ -15,6 +17,7 @@ Domain Path:  /languages
 /**
  * Register post type on plugin activation
  */
+
 //CompanyCam Taxonomy
 function register_companycam_taxonomy()
 {
@@ -179,3 +182,4 @@ require_once plugin_dir_path(__FILE__) . 'config/filters.php';
 
 // Widgets
 require_once plugin_dir_path(__FILE__) . 'config/widgets.php';
+
