@@ -24,6 +24,22 @@
 </head>
 
 <body <?php body_class(); ?>>
+	<div class="color-picker">
+		<div class="swatch navy" data-color="navy"></div>
+		<div class="swatch active blue" data-color="blue"></div>
+		<div class="swatch aqua" data-color="aqua"></div>
+		<div class="swatch teal" data-color="teal"></div>
+		<div class="swatch olive" data-color="olive"></div>
+		<div class="swatch green" data-color="green"></div>
+		<div class="swatch yellow" data-color="yellow"></div>
+		<div class="swatch orange" data-color="orange"></div>
+		<div class="swatch red" data-color="red"></div>
+		<div class="swatch pink" data-color="pink"></div>
+		<div class="swatch purple" data-color="purple"></div>
+		<div class="swatch maroon" data-color="maroon"></div>
+		<div class="swatch gray" data-color="gray"></div>
+		<div class="swatch black" data-color="black"></div>
+	  </div>
 	<header class="project-index__header container">
     <a href="https://whitecastleroofing.com"><img src="/wp-content/uploads/2018/06/white-castle-roofing-logo.png" class="company-logo" alt="White Castle Roofing Logo"></a>
     <div class="project-index__title">
