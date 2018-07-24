@@ -6,6 +6,30 @@ add_action('add_meta_boxes', 'add_custom_meta_boxes');
 add_action('admin_head-post.php', 'print_scripts');
 add_action('admin_head-post-new.php', 'print_scripts');
 add_action('save_post', 'update_post_gallery', 10, 2);
+// add_action('admin_notices', 'general_admin_notice');
+
+/**
+ * General Admin Notice
+ */
+// function general_admin_notice(){
+//     $app_key = 'companycam_app_key';
+//     $app_key_value = get_option($app_key);
+//     $url_slug = 'companycam_url_slug';  
+//     $url_slug_value = get_option($url_slug);
+//     if ( !empty($app_key_value) || !empty($url_slug_value) ) {
+//          echo '<div class="notice notice-warning is-dismissible">
+//              <p>Congrats You Successfully Set Up the Company Cam Project Feed, 
+//              <a href="/wp-admin/admin.php?page=companycam-admin-setting">Click Here to Edit your settings</a></p>
+//          </div>';
+//     }
+//     else {
+//         echo '<div class="notice notice-error is-dismissible">
+//              <p><a href="/wp-admin/admin.php?page=companycam-admin-setting">Please click here to set up your plugin</a></p>
+//          </div>';
+//     }
+// } // end general_admin_notice
+
+
 /**
  * Add custom Meta Box to Posts post type
  */
