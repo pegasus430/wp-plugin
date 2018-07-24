@@ -126,7 +126,7 @@ function my_plugin_setting() {
 	}
 
 	// Get app key
-	$app_key = 'companycam_app_key';	
+	$app_key = 'companycam_app_key';
 	$app_key_value = get_option($app_key);
 	if( !empty($_POST[$app_key]) ) {
 		$app_key_value = sanitize_text_field($_POST[$app_key]);
