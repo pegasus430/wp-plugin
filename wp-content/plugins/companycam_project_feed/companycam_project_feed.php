@@ -80,17 +80,45 @@ class CPA_Theme_Options {
     /**
      * Function that will add the options page under Setting Menu.
      */
-    public function add_page() { }
+    public function add_page() {
+        // $page_title, $menu_title, $capability, $menu_slug, $callback_function
+        add_options_page( 'Theme Options', 'Theme Options', 'manage_options', __FILE__, array( $this, 'display_page' ) );
+    }
       
     /**
      * Function that will display the options page.
      */
-    public function display_page() { }
+    public function display_page() {
+        ?>
+        <div class="wrap">
+            <h2>Theme Options</h2>
+            <form method="post" action="options.php">     
+            <?php 
+                settings_fields(__FILE__);      
+                do_settings_sections(__FILE__);
+                submit_button();
+            ?>
+            </form>
+        </div> <!-- /wrap -->
+        <?php  
+    }
        
     /**
      * Function that will register admin page options.
      */
-    public function register_page_options() { }
+    public function register_page_options(){
+        // Add Section for option fields
+        add_settings_section( 'cpa_section', 'Theme Options', array( $this, 'display_section' ), __FILE__ ); // id, title, display cb, page
+        
+        // Add Title Field
+        add_settings_field( 'cpa_title_field', 'Blog Title', array( $this, 'title_settings_field' ), __FILE__, 'cpa_section' ); // id, title, display cb, page, section
+        
+        // Add Background Color Field
+        add_settings_field( 'cpa_bg_field', 'Background Color', array( $this, 'bg_settings_field' ), __FILE__, 'cpa_section' ); // id, title, display cb, page, section
+        
+        // Register Settings
+        register_setting( __FILE__, 'cpa_settings_options', array( $this, 'validate_options' ) ); // option group, option name, sanitize cb 
+    }
      
     /**
      * Function that will add javascript file for Color Piker.
@@ -115,9 +143,15 @@ class CPA_Theme_Options {
     /**
      * Functions that display the fields.
      */
-    public function title_settings_field() { }   
+    public function title_settings_field(){
+        $val = ( isset( $this->options['title'] ) ) ? $this->options['title'] : '';
+        echo '<input type="text" name="cpa_settings_options[title]" value="' . $val . '" />';
+     }   
      
-    public function bg_settings_field( ) { }
+    public function bg_settings_field( ){
+        $val = ( isset( $this->options['title'] ) ) ? $this->options['background'] : '';
+        echo '<input type="text" name="cpa_settings_options[background]" value="' . $val . '" class="cpa-color-picker" >';
+    }
          
 } // end class
   
