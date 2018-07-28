@@ -128,7 +128,34 @@ class CPA_Theme_Options {
     /**
      * Function that will validate all fields.
      */
-    public function validate_options( $fields ) { }
+    public function validate_options( $fields ) {
+        $valid_fields = array();
+     
+        // Validate Title Field
+        $title = trim( $fields['title'] );
+        $valid_fields['title'] = strip_tags( stripslashes( $title ) );
+        
+        // Validate Background Color
+        $background = trim( $fields['background'] );
+        $background = strip_tags( stripslashes( $background ) );
+        
+        // Check if is a valid hex color
+        if( FALSE === $this->check_color( $background ) ) {
+        
+            // Set the error message
+            add_settings_error( 'cpa_settings_options', 'cpa_bg_error', 'Insert a valid color for Background', 'error' ); // $setting, $code, $message, $type
+            
+            // Get the previous valid value
+            $valid_fields['background'] = $this->options['background'];
+        
+        } else {
+        
+            $valid_fields['background'] = $background;  
+        
+        }
+        
+        return apply_filters( 'validate_options', $valid_fields, $fields);  
+    }
      
     /**
      * Function that will check if value is a valid HEX color.
