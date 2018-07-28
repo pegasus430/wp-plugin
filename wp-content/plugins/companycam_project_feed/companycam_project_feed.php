@@ -160,7 +160,13 @@ class CPA_Theme_Options {
     /**
      * Function that will check if value is a valid HEX color.
      */
-    public function check_color( $value ) { }
+    public function check_color( $value ) {
+        if ( preg_match( '/^#[a-f0-9]{6}$/i', $value ) ) { // if user insert a HEX color with #     
+            return true;
+        }
+         
+        return false;
+     }
      
     /**
      * Callback function for settings section
