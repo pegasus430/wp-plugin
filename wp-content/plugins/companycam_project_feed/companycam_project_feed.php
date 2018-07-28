@@ -14,9 +14,114 @@ License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  wporg
 Domain Path:  /languages
 */
+
 /**
  * Register post type on plugin activation
  */
+
+/**
+ * Main Class - CPA stands for Color Picker API
+ */
+class CPA_Theme_Options {
+  
+    /*--------------------------------------------*
+     * Attributes
+     *--------------------------------------------*/
+  
+    /** Refers to a single instance of this class. */
+    private static $instance = null;
+     
+    /* Saved options */
+    public $options;
+  
+    /*--------------------------------------------*
+     * Constructor
+     *--------------------------------------------*/
+  
+    /**
+     * Creates or returns an instance of this class.
+     *
+     * @return  CPA_Theme_Options A single instance of this class.
+     */
+    public static function get_instance() {
+  
+        if ( null == self::$instance ) {
+            self::$instance = new self;
+        }
+  
+        return self::$instance;
+  
+    } // end get_instance;
+  
+    /**
+     * Initializes the plugin by setting localization, filters, and administration functions.
+     */
+    private function __construct() {
+        // Add the page to the admin menu
+        add_action( 'admin_menu', array( &$this, 'add_page' ) );
+        
+        // Register page options
+        add_action( 'admin_init', array( &$this, 'register_page_options') );
+        
+        // Css rules for Color Picker
+        wp_enqueue_style( 'wp-color-picker' );
+        
+        // Register javascript
+        add_action('admin_enqueue_scripts', array( $this, 'enqueue_admin_js' ) );
+        
+        // Get registered option
+        $this->options = get_option( 'cpa_settings_options' );
+    }
+  
+    /*--------------------------------------------*
+     * Functions
+     *--------------------------------------------*/
+      
+    /**
+     * Function that will add the options page under Setting Menu.
+     */
+    public function add_page() { }
+      
+    /**
+     * Function that will display the options page.
+     */
+    public function display_page() { }
+       
+    /**
+     * Function that will register admin page options.
+     */
+    public function register_page_options() { }
+     
+    /**
+     * Function that will add javascript file for Color Piker.
+     */
+    public function enqueue_admin_js() { }
+     
+    /**
+     * Function that will validate all fields.
+     */
+    public function validate_options( $fields ) { }
+     
+    /**
+     * Function that will check if value is a valid HEX color.
+     */
+    public function check_color( $value ) { }
+     
+    /**
+     * Callback function for settings section
+     */
+    public function display_section() { /* Leave blank */ } 
+     
+    /**
+     * Functions that display the fields.
+     */
+    public function title_settings_field() { }   
+     
+    public function bg_settings_field( ) { }
+         
+} // end class
+  
+CPA_Theme_Options::get_instance(); 
 
 //CompanyCam Taxonomy
 function register_companycam_taxonomy()
