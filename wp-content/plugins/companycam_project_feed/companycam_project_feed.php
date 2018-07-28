@@ -125,7 +125,7 @@ class CPA_Theme_Options {
      */
     public function enqueue_admin_js() {
         // Make sure to add the wp-color-picker dependecy to js file
-    wp_enqueue_script( 'cpa_custom_js', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ), '', true  );
+        wp_enqueue_script( 'cpa_custom_js', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ), '', true  );
      }
      
     /**
