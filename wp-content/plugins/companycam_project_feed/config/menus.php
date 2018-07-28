@@ -160,11 +160,12 @@ function my_plugin_setting() {
 	<?php
 	}
 	?>
- 	<h2>CompanyCam Projects</h2>
+ 	<h2>Project Page Folder Name</h2>
 	<hr/>
 	<form name="form" method="post" action="">
 		<p>
-			<?php _e('Enter Folder Name:'); ?>
+			<label>Enter Folder Name:</label><label class="dashicons-before dashicons-editor-help"></label>
+			<p id="helper-text">Default is CompanyCam Projects.</p>
 			<input type="text" name="<?php echo $url_slug; ?>" value="<?php echo $url_slug_value; ?>" size="50">
 		</p>
 		<p>
@@ -173,125 +174,125 @@ function my_plugin_setting() {
 	</form>
 	<hr/>
     <?php
-
 	// Get url slug
 	$colorPicker = 'color';
 	$color = get_option($colorPicker);
 	if( !empty($_POST[$colorPicker]) ) :
 		$color = sanitize_text_field($_POST[$colorPicker]);
 		update_option('color', $color);
-		?>
+	?>
 		<div class="updated"><p><strong><?php _e('Settings successfully saved!' ); ?></strong></p></div>
 	<?php endif; ?>
 
 <style>
-	
-  .color-picker {
-    display: -ms-flexbox;
-    display: flex;
-  }
-  
-  .swatch {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    cursor: pointer;
-    outline: 4px solid transparent;
-  }
-  
-  .swatch.active {
-    outline-color: black;
-  }
-  
-  .swatch.navy {
-    background: #062e58;
-  }
-  
-  .swatch.blue {
-    background: #0074D9;
-  }
-  
-  .swatch.aqua {
-    background: #5FBFE5;
-  }
-  
-  .swatch.teal {
-    background: #39CCCC;
-  }
-  
-  .swatch.olive {
-    background: #3D9970;
-  }
-  
-  .swatch.green {
-    background: #2ECC40;
-  }
-  
-  .swatch.yellow {
-    background: #FFDC00;
-  }
-  
-  .swatch.orange {
-    background: #FF851B;
-  }
-  
-  .swatch.red {
-    background: #FF4136;
-  }
-  
-  .swatch.pink {
-    background: #F012BE;
-  }
-  
-  .swatch.purple {
-    background: #B10DC9;
-  }
-  
-  .swatch.maroon {
-    background: #85144B;
-  }
-  
-  .swatch.gray {
-    background: #999999;
-  }
-  
-  .swatch.black {
-    background: #111111;
-  }
 
+	p#helper-text {
+		display: none;
+	}
+	
+	.color-picker {
+		display: -ms-flexbox;
+		display: flex;
+	}
+	
+	.swatch {
+		width: 24px;
+		height: 24px;
+		margin-right: 8px;
+		cursor: pointer;
+		outline: 4px solid transparent;
+	}
+	
+	.swatch.active {
+		outline-color: black;
+	}
+	
+	.swatch.navy {
+		background: #062e58;
+	}
+	
+	.swatch.blue {
+		background: #0074D9;
+	}
+	
+	.swatch.aqua {
+		background: #5FBFE5;
+	}
+	
+	.swatch.teal {
+		background: #39CCCC;
+	}
+	
+	.swatch.olive {
+		background: #3D9970;
+	}
+	
+	.swatch.green {
+		background: #2ECC40;
+	}
+	
+	.swatch.yellow {
+		background: #FFDC00;
+	}
+	
+	.swatch.orange {
+		background: #FF851B;
+	}
+	
+	.swatch.red {
+		background: #FF4136;
+	}
+	
+	.swatch.pink {
+		background: #F012BE;
+	}
+	
+	.swatch.purple {
+		background: #B10DC9;
+	}
+	
+	.swatch.maroon {
+		background: #85144B;
+	}
+	
+	.swatch.gray {
+		background: #999999;
+	}
+	
+	.swatch.black {
+		background: #111111;
+	}
 </style>
 
-	<h2>Select Color </h2>
-	<hr/>
-    <form name="form" method="post" action="" style="position:relative;">
-		<h3>Brand Color</h3>
-		<div class="color-picker">
-			<div class="swatch navy" data-color="navy"></div>
-			<div class="swatch active blue" data-color="blue"></div>
-			<div class="swatch aqua" data-color="aqua"></div>
-			<div class="swatch teal" data-color="teal"></div>
-			<div class="swatch olive" data-color="olive"></div>
-			<div class="swatch green" data-color="green"></div>
-			<div class="swatch yellow" data-color="yellow"></div>
-			<div class="swatch orange" data-color="orange"></div>
-			<div class="swatch red" data-color="red"></div>
-			<div class="swatch pink" data-color="pink"></div>
-			<div class="swatch purple" data-color="purple"></div>
-			<div class="swatch maroon" data-color="maroon"></div>
-			<div class="swatch gray" data-color="gray"></div>
-			<div class="swatch black" data-color="black"></div>
-		</div>
-        <p>
-            <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save') ?>" />
-        </p>
-	</form>
-	<hr/>
+<h2>Select Color </h2>
+<hr/>
+<form name="form" method="post" action="" style="position:relative;">
+	<h3>Brand Color</h3>
+	<div class="color-picker">
+		<div class="swatch navy" data-color="navy"></div>
+		<div class="swatch active blue" data-color="blue"></div>
+		<div class="swatch aqua" data-color="aqua"></div>
+		<div class="swatch teal" data-color="teal"></div>
+		<div class="swatch olive" data-color="olive"></div>
+		<div class="swatch green" data-color="green"></div>
+		<div class="swatch yellow" data-color="yellow"></div>
+		<div class="swatch orange" data-color="orange"></div>
+		<div class="swatch red" data-color="red"></div>
+		<div class="swatch pink" data-color="pink"></div>
+		<div class="swatch purple" data-color="purple"></div>
+		<div class="swatch maroon" data-color="maroon"></div>
+		<div class="swatch gray" data-color="gray"></div>
+		<div class="swatch black" data-color="black"></div>
+	</div>
+    <p>
+        <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save') ?>" />
+    </p>
+</form>
+<hr/>
 	
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-  
-// Color swatch functionality - we won't need this in the final plugin code
-
+		// Color swatch functionality - we won't need this in the final plugin code
 		jQuery('.swatch').click(function() {
 			var color = jQuery(this).attr('data-color');
 			jQuery('.swatch').removeClass('active');
@@ -300,7 +301,17 @@ function my_plugin_setting() {
 			jQuery(':root').css('--theme-color', color);
 		})
 	});
+
+	jQuery(document).ready(function() {
+		jQuery('.dashicons-editor-help').hover(function() {
+			jQuery('p#helper-text').css('display', 'block');
+			}, function(){
+			jQuery('p#helper-text').css('display', 'none');
+		})
+	});
+
 </script>
+
     <!--  url slug code end  -->
 	<?php
 	// verification token code start 
