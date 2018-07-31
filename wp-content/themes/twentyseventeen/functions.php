@@ -26,7 +26,7 @@ function general_admin_notice(){
     if ( is_plugin_active('companycam_project_feed/companycam_project_feed.php') ) {
          echo '<div class="notice notice-warning is-dismissible">
              <p>Congrats You Successfully Set Up the Company Cam Project Feed, 
-			 <a href="/wp-admin/admin.php?page=companycam-admin-home">Click Here to Edit your settings</a></p>
+			 <a href="/wp-admin/admin.php?page=companycam-admin-setting">Click Here to Edit your settings</a></p>
          </div>';
     }
 	else {
