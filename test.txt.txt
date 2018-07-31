@@ -1,1 +1,2 @@
-testing the git push to github and pull to server
+testing the git push to github and pull to server.
+scott edit
