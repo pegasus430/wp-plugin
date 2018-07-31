@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 testing the git push to github and pull to server.
 scott edit
-=======
-tesitng from fresh repo
->>>>>>> 70b10a51f51f0422dfdd8fcc0b84370dd7194bcf
