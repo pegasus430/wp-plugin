@@ -1,2 +1,3 @@
 testing the git push to github and pull to server.
-scott edit wsdsw sdv sdv adscsdc
+scott edit wsdsw sdv sdv 
+changed the gitconfig for gitignore_global
