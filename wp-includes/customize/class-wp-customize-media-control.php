@@ -188,9 +188,9 @@ class WP_Customize_Media_Control extends WP_Customize_Control {
 			</div>
 		<# } else { #>
 			<div class="attachment-media-view">
-				<!-- <div class="placeholder actions">
+				<div class="placeholder">
 						{{ data.button_labels.placeholder }}
-				</div> -->
+				</div>
 				<div class="actions">
 					<# if ( data.defaultAttachment ) { #>
 						<button type="button" class="button default-button">{{ data.button_labels['default'] }}</button>

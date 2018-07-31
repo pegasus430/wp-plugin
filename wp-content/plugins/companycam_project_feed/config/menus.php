@@ -22,7 +22,6 @@ function my_plugin_home() {
 	<script type="text/javascript" src="<?= esc_url( plugins_url( '../js/scripts.js', __FILE__ ) )?>"></script>
 	<link rel='stylesheet' id='custom-style-css'  href='<?= esc_url( plugins_url( '../css/style.css', __FILE__ ) )?>' type='text/css' media='all' />
 	<div class="plugin_banner">
-
 		<?php
 		//$comp_logo_url = get_option('CompCam_logo');
 		//if($comp_logo_url){
@@ -35,7 +34,6 @@ function my_plugin_home() {
 		?>
         <h1>CompanyCam</h1>
 		<span>CompanyCam v1.0</span>
-
 	</div>
 	<div class="container companycam">
 		<div class="tab_data">
@@ -99,7 +97,6 @@ function my_plugin_home() {
 					<li><strong>Last Updated:</strong> 2 days ago</li>
 				</ul>
 				<hr/>
-
 				<h2>Change log of plugin</h2>
 				<h3><strong>Version:</strong> 1.0 &ndash; 2018-06-20</h3>
 				<ul>
@@ -112,9 +109,6 @@ function my_plugin_home() {
 			</div>
 		</div>
 	</div> 
-
-
-
 	<?php  
 	}
 /* Setting page function of plugin */
@@ -264,7 +258,7 @@ function my_plugin_setting() {
 	}
 </style>
 
-<h2>Select Color </h2>
+<h2>Select Color</h2>
 <hr/>
 <form name="form" method="post" action="" style="position:relative;">
 	<h3>Brand Color</h3>
@@ -388,11 +382,3 @@ function my_plugin_options() {
 	</form>
 <?php
 }
-
-
-
-	
-
-
-
-  
