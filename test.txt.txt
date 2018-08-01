@@ -1,1 +1,1 @@
-remove wp-contents and licences logs
+test merge by Scott
