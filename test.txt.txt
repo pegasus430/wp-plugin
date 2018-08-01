@@ -1,1 +1,1 @@
-remove wp-admin and wp-includes on server
+remove wp-contents and licences logs
