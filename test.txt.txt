@@ -1,1 +1,1 @@
-change .gitconfig on server for runcloud workflow from web-flow to reimelss
+verify for successful deployment
