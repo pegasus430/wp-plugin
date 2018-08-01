@@ -1,1 +1,1 @@
-testing with permission
+remove wp-admin and wp-includes on server
