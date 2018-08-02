@@ -1,2 +1,1 @@
-testing the git push to github and pull to server.
-scott edit
+verify for successful deployment
