@@ -177,7 +177,6 @@ function my_plugin_setting() {
 	?>
 		<div class="updated"><p><strong><?php _e('Settings successfully saved!' ); ?></strong></p></div>
 	<?php endif; ?>
-
 <style>
 
 	p#helper-text {
@@ -262,6 +261,7 @@ function my_plugin_setting() {
 <hr/>
 <form name="form" method="post" action="" style="position:relative;">
 	<h3>Brand Color</h3>
+	<input type="hidden" id="colorinput" name="color" value="">
 	<div class="color-picker">
 		<div class="swatch navy" data-color="navy"></div>
 		<div class="swatch active blue" data-color="blue"></div>
@@ -286,9 +286,13 @@ function my_plugin_setting() {
 	
 <script type="text/javascript">
 	jQuery(document).ready(function() {
+		var color = '<?php echo get_option('color'); ?>';
+		jQuery('.swatch').removeClass('active');
+		jQuery('div[data-color = '+color+']').addClass('active');
 		// Color swatch functionality - we won't need this in the final plugin code
 		jQuery('.swatch').click(function() {
-			var color = jQuery(this).attr('data-color');
+			color = jQuery(this).attr('data-color');
+			jQuery('#colorinput').val(color);
 			jQuery('.swatch').removeClass('active');
 			jQuery(this).addClass('active')
 			jQuery('html').removeClass().addClass(color);

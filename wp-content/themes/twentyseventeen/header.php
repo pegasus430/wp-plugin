@@ -13,7 +13,7 @@
  */
 
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js no-svg">
+<html <?php language_attributes(); ?> class="no-js no-svg <?php echo get_option('color'); ?>" style="--theme-color:<?php echo get_option('color'); ?>;">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,8 +25,9 @@
 
 <body <?php body_class(); ?>>
   <div class="color-picker">
+    <?php $color = get_option('color'); ?>
     <div class="swatch navy" data-color="navy"></div>
-    <div class="swatch active blue" data-color="blue"></div>
+    <div class="swatch blue" data-color="blue"></div>
     <div class="swatch aqua" data-color="aqua"></div>
     <div class="swatch teal" data-color="teal"></div>
     <div class="swatch olive" data-color="olive"></div>
