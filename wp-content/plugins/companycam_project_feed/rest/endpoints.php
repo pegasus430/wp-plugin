@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) or die( 'No direct access allowed.' );
  */
 function process_webhook( WP_REST_Request $request ) {
 	
-		$resp = wp_remote_get( 'http://192.168.0.81/json/remote_data.json' );
+		$resp = wp_remote_get( 'http://192.168.0.81/staging/companycam-wp-site-and-plugin/remote_data.json' );
 			// Check for error
 			if ( is_wp_error( $resp ) ) {
 					return;
