@@ -814,50 +814,66 @@ class WP_REST_Server {
 		 * @param WP_REST_Server  $this    Server instance.
 		 * @param WP_REST_Request $request Request used to generate the response.
 		 */
+		
 		$result = apply_filters( 'rest_pre_dispatch', null, $this, $request );
-
 		if ( ! empty( $result ) ) {
 			return $result;
 		}
 
 		$method = $request->get_method();
 		$path   = $request->get_route();
-
+       
+        
 		foreach ( $this->get_routes() as $route => $handlers ) {
+			
 			$match = preg_match( '@^' . $route . '$@i', $path, $matches );
-
+             
 			if ( ! $match ) {
+				
 				continue;
 			}
 
 			$args = array();
 			foreach ( $matches as $param => $value ) {
+				
 				if ( ! is_int( $param ) ) {
 					$args[ $param ] = $value;
+					
 				}
 			}
-
+             
 			foreach ( $handlers as $handler ) {
 				$callback  = $handler['callback'];
+				
 				$response = null;
 
 				// Fallback to GET method if no HEAD method is registered.
 				$checked_method = $method;
+				
+				   
+				
+				
 				if ( 'HEAD' === $method && empty( $handler['methods']['HEAD'] ) ) {
+				
 					$checked_method = 'GET';
-				}
+					}  
+				
+				
 				if ( empty( $handler['methods'][ $checked_method ] ) ) {
+					
 					continue;
 				}
-
+                
+               
 				if ( ! is_callable( $callback ) ) {
 					$response = new WP_Error( 'rest_invalid_handler', __( 'The handler for the route is invalid' ), array( 'status' => 500 ) );
 				}
-
+				 
+              
 				if ( ! is_wp_error( $response ) ) {
 					// Remove the redundant preg_match argument.
 					unset( $args[0] );
-
+                    
 					$request->set_url_params( $args );
 					$request->set_attributes( $handler );
 
@@ -899,15 +915,18 @@ class WP_REST_Server {
 				 * @param WP_REST_Request  $request  Request used to generate the response.
 				 */
 				$response = apply_filters( 'rest_request_before_callbacks', $response, $handler, $request );
-
+                 
 				if ( ! is_wp_error( $response ) ) {
+				         
 					// Check permission specified on the route.
 					if ( ! empty( $handler['permission_callback'] ) ) {
-						$permission = call_user_func( $handler['permission_callback'], $request );
+						 $permission = call_user_func( $handler['permission_callback'], $request );
 
 						if ( is_wp_error( $permission ) ) {
+							
 							$response = $permission;
 						} elseif ( false === $permission || null === $permission ) {
+							
 							$response = new WP_Error( 'rest_forbidden', __( 'Sorry, you are not allowed to do that.' ), array( 'status' => rest_authorization_required_code() ) );
 						}
 					}
@@ -958,20 +977,24 @@ class WP_REST_Server {
 				 * @param WP_REST_Request  $request  Request used to generate the response.
 				 */
 				$response = apply_filters( 'rest_request_after_callbacks', $response, $handler, $request );
-
+				
 				if ( is_wp_error( $response ) ) {
 					$response = $this->error_to_response( $response );
+					 
 				} else {
 					$response = rest_ensure_response( $response );
+					
 				}
 
 				$response->set_matched_route( $route );
 				$response->set_matched_handler( $handler );
-
-				return $response;
+                 
+					return $response;
+				
+				
 			}
 		}
-
+        
 		return $this->error_to_response( new WP_Error( 'rest_no_route', __( 'No route was found matching the URL and request method' ), array( 'status' => 404 ) ) );
 	}
 
