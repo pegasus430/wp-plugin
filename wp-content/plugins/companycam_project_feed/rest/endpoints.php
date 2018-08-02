@@ -5,52 +5,63 @@ defined( 'ABSPATH' ) or die( 'No direct access allowed.' );
  * Register route to listen to webhooks
  */
 function process_webhook( WP_REST_Request $request ) {
-
-	// Get the JSON parameters as array
-	$params = $request->get_json_params();
-
-	// Make sure we got information posted and parsed from the webhook.
-	if( !empty($params) ) {
-
-		// Create categories if they don't exists
-		if( !empty($params['categories']) && (count($params['categories']) > 0) ) {
-			foreach($params['categories'] as $category) {
-				if( !term_exists($category, 'companycam_feed_category') ) {
-					wp_insert_term($category, 'companycam_feed_category');
+	
+		$resp = wp_remote_get( 'http://192.168.0.81/json/remote_data.json' );
+			// Check for error
+			if ( is_wp_error( $resp ) ) {
+					return;
 				}
-			}
-		}
-
-		// Check if the custom post exists by id
-		$post_status = get_post_status($params['companyCamCollectionId']);
-
-		// Check if post exists
-		if( $post_status === false ) {
-
-			// Create post. We use import id to be able to use the collection id sent
-			$post_array = array(
-				'import_id' => $params['companyCamCollectionId'],
-				'post_content' => $params['description'],
-				'post_title' => $params['title'],
-				'post_status' => 'publish',
-				'post_type' => 'companycam_feed'
-			);
-			$postId = wp_insert_post($post_array);
-
-			// Attach categories to newly created post
-			wp_set_object_terms($postId, array_values($params['categories']), 'companycam_feed_category', true);
-
-			// Build the response object
-			$response = new WP_REST_Response(
-				array(
-					'status' => 'success',
-					'post_id' => $postId
-				)
-			);
-			$response->set_status(200);
-			return $response->data;
-		}
-	}
+			// Parse remote HTML file
+			  $json = wp_remote_retrieve_body( $resp );
+			// Check for error
+				if ( is_wp_error( $data ) ) {
+					return;
+				}
+			
+				$data = json_decode($json);
+				$version = $data->{'version'};
+				$title = $data->{'title'};
+				$description = $data->{'description'};
+				$categories = $data->{'categories'};
+				foreach($categories as  $cat)
+					{
+				//	 echo $cat[0];
+					}
+				$materials = $data->{'materials'};
+				  foreach($materials as  $mat)
+					{
+				//	 echo $mat[0];
+					}
+				
+				$user_id = get_current_user_id();				
+				$post_data = array(
+					'post_author' => $user_id,
+					'post_content' => $description,
+					'post_content_filtered' => '',
+					'post_title' => $title,
+					'post_excerpt' => '',
+					'post_status' => 'draft',
+					'post_type' => 'post',
+					'comment_status' => '',
+					'ping_status' => 'open',
+					'post_password' => '',
+					'to_ping' =>  '',
+					'pinged' => '',
+					'post_parent' => 0,
+					'menu_order' => 0,
+					'guid' => '',
+					'import_id' => 0,
+					'context' => '',
+				);
+				// Post data to database
+				wp_insert_post($post_data, false);
+					
+					
+					//print_r(get_posts());	
+			
+					
+                     return "success";
+			
 }
 
 // Register route for our webhook in wordpress
@@ -59,7 +70,7 @@ add_action('rest_api_init', function(){
 		'companycam/v1',
 		'webhook',
 		array(
-			'methods' => 'POST',
+			'methods' => 'GET',
 			'callback' => 'process_webhook'
 		)
 	);
